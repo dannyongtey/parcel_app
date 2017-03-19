@@ -11,7 +11,7 @@
   </thead>
 
   <tbody>
-    <% if !@search_key %>
+
     <% @parcels.each do |parcel| %>
       <tr>
         <td><%= parcel.name %></td>
@@ -24,17 +24,6 @@
         <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-    <% else %>
-        <tr>
-        <td><%= @parcels.name %></td>
-        <td><%= @parcels.quantity %></td>
-        <td><%= @parcels.phone %></td>
-        <td><%= @parcels.courier %></td>
-        <td><%= @parcels.remakrs %></td>
-        <td><%= link_to 'Show', @parcels %></td>
-        <td><%= link_to 'Edit', edit_parcel_path(@parcels) %></td>
-        <td><%= link_to 'Destroy', @parcels, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% end %>
+
   </tbody>
 </table>

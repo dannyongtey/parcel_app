@@ -6,7 +6,7 @@
   <h2 class = "text-center">Search Parcel</h2>
   <div>
   <%= form_for(:search, url: search_path) do |f| %>
-  <%= f.text_field :search_key, class: "form-control", value: @search_key %>
+  <%= f.text_field :search_key, class: "form-control", value: @search_key, placeholder: "Type search keywords here" %>
   <br>
   <%= f.label :Search_by %>
   <%= f.select :search_type, ["name", "phone"], class: "form-control", selected: @search_type %>
@@ -16,7 +16,7 @@
   
   </div>
 </div>
-<% if @parcels.nil? %>
+<% if @parcels.empty? %>
 <br>
 <div class = "jumbotron container-fluid">
   <h3>No related parcel found. Try:</h3>
@@ -25,12 +25,9 @@
     <li>Use another search method</li>
   </ol>
 </div>
-<% elsif @search_key %>
-<%= render "table" %>
 <% else %>
 <%= will_paginate %>
 <%= render "table" %>
-
 <br>
 <%= will_paginate %>
 <%= link_to 'New Parcel', new_parcel_path %>

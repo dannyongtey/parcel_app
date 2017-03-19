@@ -19,10 +19,9 @@ class ParcelsController < ApplicationController
   end
   
   def search
-    @parcels = Parcel.find_by(params[:search][:search_type].to_sym => "#{params[:search][:search_key]}")
+    @parcels = Parcel.search(params[:search][:search_type], params[:search][:search_key]).paginate(page: params[:page])
     @search_type = params[:search][:search_type]
     @search_key = params[:search][:search_key]
-    
     render "index"
   end
 
