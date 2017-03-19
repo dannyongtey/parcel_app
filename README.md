@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Parcel Tracking App, created using Ruby on Rails
 
-Things you may want to cover:
+Rails version used: 5.0.1
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+App description: An application designed to help Multimedia University (MMU) students track their parcel without having to download an excel document everyday.

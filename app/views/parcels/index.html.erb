@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1>Parcels</h1>
+<div class = "container">
+  <h2 class = "text-center">Search Parcel</h2>
+  <div>
+  <%= form_for(:search, url: search_path) do |f| %>
+  <%= f.text_field :search_key, class: "form-control", value: @search_key %>
+  <br>
+  <%= f.label :Search_by %>
+  <%= f.select :search_type, ["name", "phone"], class: "form-control", selected: @search_type %>
+  <br><br>
+  <%= f.submit "Search", class: "btn" %>
+  <% end %>
+  
+  </div>
+</div>
+<% if @parcels.nil? %>
+<br>
+<div class = "jumbotron container-fluid">
+  <h3>No related parcel found. Try:</h3>
+  <ol>
+    <li>Checking your search keyword</li>
+    <li>Use another search method</li>
+  </ol>
+</div>
+<% elsif @search_key %>
+<%= render "table" %>
+<% else %>
+<%= will_paginate %>
+<%= render "table" %>
+
+<br>
+<%= will_paginate %>
+<%= link_to 'New Parcel', new_parcel_path %>
+<% end %>

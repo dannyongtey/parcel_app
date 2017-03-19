@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @parcel.name %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @parcel.quantity %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @parcel.phone %>
+</p>
+
+<p>
+  <strong>Courier:</strong>
+  <%= @parcel.courier %>
+</p>
+
+<p>
+  <strong>Remakrs:</strong>
+  <%= @parcel.remakrs %>
+</p>
+
+<%= link_to 'Edit', edit_parcel_path(@parcel) %> |
+<%= link_to 'Back', parcels_path %>

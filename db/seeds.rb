@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+100.times do |f|
+  Parcel.create!(name: Faker::Name.name,
+                 quantity: 1,
+                 phone: "012345678#{f}",
+                 courier: "RandomCourier-#{f}")
+end

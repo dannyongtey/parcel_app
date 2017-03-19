@@ -1,0 +1,40 @@
+<table class = "table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Phone</th>
+      <th>Courier</th>
+      <th>Remakrs</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if !@search_key %>
+    <% @parcels.each do |parcel| %>
+      <tr>
+        <td><%= parcel.name %></td>
+        <td><%= parcel.quantity %></td>
+        <td><%= parcel.phone %></td>
+        <td><%= parcel.courier %></td>
+        <td><%= parcel.remakrs %></td>
+        <td><%= link_to 'Show', parcel %></td>
+        <td><%= link_to 'Edit', edit_parcel_path(parcel) %></td>
+        <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <% else %>
+        <tr>
+        <td><%= @parcels.name %></td>
+        <td><%= @parcels.quantity %></td>
+        <td><%= @parcels.phone %></td>
+        <td><%= @parcels.courier %></td>
+        <td><%= @parcels.remakrs %></td>
+        <td><%= link_to 'Show', @parcels %></td>
+        <td><%= link_to 'Edit', edit_parcel_path(@parcels) %></td>
+        <td><%= link_to 'Destroy', @parcels, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
