@@ -36,7 +36,7 @@ class ParcelsController < ApplicationController
   # POST /parcels.json
   def create
     @parcel = Parcel.new(parcel_params)
-
+    debugger
     respond_to do |format|
       if @parcel.save
         format.html { redirect_to @parcel, notice: 'Parcel was successfully created.' }

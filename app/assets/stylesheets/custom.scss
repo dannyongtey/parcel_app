@@ -1,6 +1,6 @@
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 #logo {
   float: left;
@@ -16,4 +16,8 @@
 #logo:hover {
   color: #fff;
   text-decoration: none;
+}
+
+body {
+  padding-top: 65px;
 }

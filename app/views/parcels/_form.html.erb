@@ -1,6 +1,7 @@
+<div class = "row">
 <%= form_for(parcel) do |f| %>
   <% if parcel.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class= "col-md-12">
       <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>
 
       <ul>
@@ -10,33 +11,98 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="field col-md-2">
     <%= f.label :name %>
-    <%= f.text_field :name %>
   </div>
 
-  <div class="field">
+  <div class="field col-md-2">
     <%= f.label :quantity %>
-    <%= f.number_field :quantity %>
   </div>
 
-  <div class="field">
+  <div class="field col-md-2">
     <%= f.label :phone %>
-    <%= f.number_field :phone %>
   </div>
 
-  <div class="field">
+  <div class="field col-md-2">
     <%= f.label :courier %>
-    <%= f.text_field :courier %>
   </div>
 
-  <div class="field">
-    <%= f.label :remakrs %>
-    <%= f.text_field :remakrs %>
+  <div class="field col-md-4">
+    <%= f.label :remarks %>
   </div>
 
+  <div class ="auto_appear">
+    <!-- Auto appearing form -->
+    <div class="field col-md-2 nameinput">
+      <%= f.text_field :name, class: "namefield"%>
+    </div>
+
+    <div class="field col-md-2">
+      <%= f.number_field :quantity %>
+    </div>
+  
+    <div class="field col-md-2">
+      <%= f.text_field :phone %>
+    </div>
+  
+    <div class="field col-md-2">
+      <%= f.text_field :courier %>
+    </div>
+  
+    <div class="field col-md-4">
+      <%= f.text_field :remarks %>
+    </div>
+<!-- Submit button -->
+    
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+</div>
+
+<script>
+  var form = document.getElementsByClassName("auto_appear")[0];
+  var names = ["parcel[name]", "parcel[quantity]", "parcel[phone]", "parcel[courier]", "parcel[remarks]"];
+  var types = ["text","number","text","text","text"];
+  var count = 0;
+  document.body.addEventListener("keypress", function(event){
+    if (event.target.classList.contains("namefield") === true){
+        event.target.classList.remove("namefield");
+        count++;
+        container = document.createElement("DIV");
+        container.id = "form-" + count;
+        for (var i = 0; i < 5; i++){
+          var div = document.createElement("DIV");
+          if (i == 4){
+            div.classList.add("col-md-4");
+          }else{
+            div.classList.add("col-md-2"); 
+          }
+          div.classList.add("field");
+          var field = document.createElement("input");
+          field.setAttribute("name", names[i]);
+          field.setAttribute("type", types[i]);
+          if (i == 0){
+            field.classList.add("namefield");
+            field.classList.add("nameinput");
+          }
+          
+          div.appendChild(field);
+          container.appendChild(div);
+        }
+       form.appendChild(container);
+    }
+    
+  });
+  document.getElementsByClassName("nameinput")[0].addEventListener("keydown", function(event){
+    var key = event.keyCode || event.charCode;
+    if (key == 8 || key == 46){
+       var namefield = event.target;
+       if (namefield.value == ""){
+         
+       }
+    }
+  });
+  
+</script>
