@@ -1,6 +1,6 @@
 class ParcelsController < ApplicationController
   before_action :set_parcel, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_admin, only: [:new, :create]
   # GET /parcels
   # GET /parcels.json
   def index
@@ -36,7 +36,6 @@ class ParcelsController < ApplicationController
   # POST /parcels.json
   def create
     @parcel = Parcel.new(parcel_params)
-    debugger
     respond_to do |format|
       if @parcel.save
         format.html { redirect_to @parcel, notice: 'Parcel was successfully created.' }
@@ -86,5 +85,8 @@ class ParcelsController < ApplicationController
     def search_params
       params.require(:search).permit(:search_key, :search_type)
     end
-  
+    
+    def check_admin 
+      redirect_to root_path unless admin?
+    end
 end
