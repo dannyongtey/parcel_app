@@ -26,6 +26,9 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'faker',                   '1.6.6'
 gem 'font-awesome-sass-rails'
 
+gem "omniauth-google-oauth2", "~> 0.2.1"
+gem "devise"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
