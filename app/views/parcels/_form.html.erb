@@ -1,75 +1,48 @@
 <div class = "row">
-<%= form_for(parcel) do |f| %>
-  <% if parcel.errors.any? %>
-    <div id="error_explanation" class= "col-md-12">
-      <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>
-
-      <ul>
-      <% parcel.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render "shared/error_messages" %>
+<%= form_tag(parcels_path, method: "post") do |f| %>
   <div class="field col-md-2">
-    <%= f.label :name %>
+    <%= label_tag "Name" %>
   </div>
 
   <div class="field col-md-2">
-    <%= f.label :quantity %>
+    <%= label_tag "Quantity" %>
   </div>
 
   <div class="field col-md-2">
-    <%= f.label :phone %>
+    <%= label_tag "Phone" %>
   </div>
 
   <div class="field col-md-2">
-    <%= f.label :courier %>
+    <%= label_tag "Courier" %>
   </div>
 
   <div class="field col-md-4">
-    <%= f.label :remarks %>
+    <%= label_tag "Remarks" %>
   </div>
-
+  
   <div class ="auto_appear">
-    <!-- Auto appearing form -->
-    <div class="field col-md-2 nameinput">
-      <%= f.text_field :name, class: "namefield"%>
-    </div>
+  <!-- Auto appearing form -->
+  <%= render "auto_appear" %>
+  </div>
+  <div class = "actions">
+    <%= submit_tag "Submit" %>
+  </div>
 
-    <div class="field col-md-2">
-      <%= f.number_field :quantity %>
-    </div>
-  
-    <div class="field col-md-2">
-      <%= f.text_field :phone %>
-    </div>
-  
-    <div class="field col-md-2">
-      <%= f.text_field :courier %>
-    </div>
-  
-    <div class="field col-md-4">
-      <%= f.text_field :remarks %>
-    </div>
-<!-- Submit button -->
-    
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
-</div>
-
+  
 <script>
-  var form = document.getElementsByClassName("auto_appear")[0];
-  var names = ["parcel[name]", "parcel[quantity]", "parcel[phone]", "parcel[courier]", "parcel[remarks]"];
-  var types = ["text","number","text","text","text"];
+
   var count = 0;
+  var form = document.getElementsByClassName("auto_appear")[0];
+ 
+  var types = ["text","number","text","text","text"];
+
   document.body.addEventListener("keypress", function(event){
     if (event.target.classList.contains("namefield") === true){
         event.target.classList.remove("namefield");
         count++;
+        var names = [`parcel[${count}][name]`, `parcel[${count}][quantity]`, `parcel[${count}][phone]`, `parcel[${count}][courier]`, `parcel[${count}][remarks]`]; 
         container = document.createElement("DIV");
         container.id = "form-" + count;
         for (var i = 0; i < 5; i++){

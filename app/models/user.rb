@@ -2,8 +2,7 @@ class User < ApplicationRecord
 
 
   def self.from_omniauth(auth)
-    user = User.find_by(email: auth.info.email)
-    if user
+    if user = User.find_by(email: auth.info.email)
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name

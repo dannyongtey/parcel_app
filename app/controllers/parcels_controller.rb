@@ -1,6 +1,6 @@
 class ParcelsController < ApplicationController
   before_action :set_parcel, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, only: [:new, :create]
+  #before_action :check_admin, only: [:new, :create]
   # GET /parcels
   # GET /parcels.json
   def index
@@ -16,6 +16,7 @@ class ParcelsController < ApplicationController
   # GET /parcels/new
   def new
     @parcel = Parcel.new
+    @error_messages = []
   end
   
   def search
@@ -35,6 +36,22 @@ class ParcelsController < ApplicationController
   # POST /parcels
   # POST /parcels.json
   def create
+    parcels = params["parcel"]
+    @error_messages = []
+    (0..parcels.length-2).each do |f|
+      parcel = parcels[f.to_s]
+      new_parcel = Parcel.new(name: parcel["name"], quantity: parcel["quantity"].to_i, phone: parcel["phone"], courier: parcel["courier"], remarks: parcel["remarks"])
+      unless new_parcel.save
+        @error_messages << "Parcel #{f+1} is not saved, possibly due to empty field"
+      end
+    end
+    if @error_messages.empty?
+      flash.now[:info] = "All parcels are saved successfully!"
+      
+    end
+    render "new"
+  end
+=begin
     @parcel = Parcel.new(parcel_params)
     respond_to do |format|
       if @parcel.save
@@ -45,7 +62,7 @@ class ParcelsController < ApplicationController
         format.json { render json: @parcel.errors, status: :unprocessable_entity }
       end
     end
-  end
+=end
 
   # PATCH/PUT /parcels/1
   # PATCH/PUT /parcels/1.json
