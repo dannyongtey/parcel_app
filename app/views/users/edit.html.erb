@@ -4,10 +4,18 @@
 <br><br><br>
 <div class = "container">
 <div class = "jumbotron col-md-4 col-md-offset-4" >
-  
+
 <%= form_for (@user) do |f| %>
   <%= f.label :Phone %>
   <%= f.text_field :phone, class: "form-control"%>
+<!--
+  <% if current_user.admin? %>
+    <%= f.label :Email %>
+    <%= f.text_field :email %>
+    <%= f.label :Change_Password %>
+    <%= f.password_field :password %>
+  <% end %>
+  -->
   <br>
   <%= f.submit "Update phone number", class: "btn" %>
 <% end %>

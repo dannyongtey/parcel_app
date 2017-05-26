@@ -1,10 +1,11 @@
 class ParcelsController < ApplicationController
   before_action :set_parcel, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :edit, :update, :destroy]
   #before_action :check_admin, only: [:new, :create]
   # GET /parcels
   # GET /parcels.json
   def index
-    @parcels = Parcel.order("created_at DESC").paginate(page: params[:page])
+    @parcels = Parcel.paginate(page: params[:page])
     
   end
 
@@ -15,6 +16,7 @@ class ParcelsController < ApplicationController
 
   # GET /parcels/new
   def new
+    
     @parcel = Parcel.new
     @error_messages = []
   end
@@ -31,6 +33,7 @@ class ParcelsController < ApplicationController
 
   # GET /parcels/1/edit
   def edit
+    
   end
 
   # POST /parcels
@@ -83,7 +86,7 @@ class ParcelsController < ApplicationController
   def destroy
     @parcel.destroy
     respond_to do |format|
-      format.html { redirect_to parcels_url, notice: 'Parcel was successfully destroyed.' }
+      format.html { redirect_to parcels_url, notice: 'Parcel was claimed and deleted from database permanently.' }
       format.json { head :no_content }
     end
   end
@@ -103,7 +106,5 @@ class ParcelsController < ApplicationController
       params.require(:search).permit(:search_key, :search_type)
     end
     
-    def check_admin 
-      redirect_to root_path unless admin?
-    end
+
 end

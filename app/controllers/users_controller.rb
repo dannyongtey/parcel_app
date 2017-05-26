@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-before_action :correct_user?
+before_action :correct_user?, except: :index
+before_action :check_admin, only: :index
+
   def edit
-    
     @user = current_user
   end
   
@@ -11,6 +12,10 @@ before_action :correct_user?
     @user.update_attributes(phone: phone_num)
     flash.now[:success] = "Phone number updated successfully"
     render 'edit'
+  end
+  
+  def index
+    @users = User.all.paginate(page: params[:page])
   end
   private
   

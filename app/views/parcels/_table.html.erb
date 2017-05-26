@@ -1,12 +1,15 @@
 <table class = "table">
   <thead>
     <tr>
+      <th>Received</th>
       <th>Name</th>
       <th>Quantity</th>
       <th>Phone</th>
       <th>Courier</th>
       <th>Remarks</th>
-      <th colspan="3"></th>
+      <% if current_user.admin? %>
+      <th colspan="3">Actions</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -14,26 +17,30 @@
     <% if !@search_key %>
     <% @parcels.each do |parcel| %>
       <tr>
+        <td><%= time_ago_in_words(parcel.created_at) %> ago</td>
         <td><%= parcel.name %></td>
         <td><%= parcel.quantity %></td>
         <td><%= parcel.phone %></td>
         <td><%= parcel.courier %></td>
         <td><%= parcel.remarks %></td>
-        <td><%= link_to 'Show', parcel %></td>
+        <% if current_user.admin? %>
         <td><%= link_to 'Edit', edit_parcel_path(parcel) %></td>
-        <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Claimed', parcel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
     <% else %>
         <tr>
+        <td><%= time_ago_in_words(@parcel.created_at) %> ago</td>
         <td><%= @parcels.name %></td>
         <td><%= @parcels.quantity %></td>
         <td><%= @parcels.phone %></td>
         <td><%= @parcels.courier %></td>
         <td><%= @parcels.remarks %></td>
-        <td><%= link_to 'Show', @parcels %></td>
+        <% if current_user.admin? %>
         <td><%= link_to 'Edit', edit_parcel_path(@parcels) %></td>
-        <td><%= link_to 'Destroy', @parcels, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Claimed', @parcels, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
       <% end %>
   </tbody>

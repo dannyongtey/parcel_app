@@ -2,6 +2,13 @@
 @import "bootstrap";
 @import "font-awesome";
 
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  
+}
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -20,4 +27,20 @@
 
 body {
   padding-top: 65px;
+}
+
+h1{
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 1;
+}
+
+.btn-primary {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+  height: auto !important;
 }

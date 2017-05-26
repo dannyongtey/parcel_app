@@ -1,2 +1,12 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h1 class = "center">Sign in</h1>
+<div class = "row" id = "login">
+  <div class = "col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: login_path) do |f| %>
+      <div><%= hidden_field_tag :username, "admin" %></div>
+      <%= f.label :Access_password %>
+      <%= f.password_field :password, class: "form-control" %>
+      
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

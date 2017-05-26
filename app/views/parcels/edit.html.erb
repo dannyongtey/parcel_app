@@ -1,6 +1,21 @@
 <h1>Editing Parcel</h1>
 
-<%= render 'form', parcel: @parcel %>
-
+<div id = "parcel_edit" class = "jumbotron row">
+<%= form_for @parcel do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity %>
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+  <%= f.label :courier %>
+  <%= f.text_field :courier %>
+  <%= f.label :remarks %>
+  <%= f.text_field :remarks %>
+  <div class = "submit">
+  <%= f.submit "Update", class: "btn col-md-4" %>
+  </div>
+<% end %>
+</div>
 <%= link_to 'Show', @parcel %> |
 <%= link_to 'Back', parcels_path %>
