@@ -22,10 +22,9 @@
     <li>Use another search method</li>
   </ol>
 </div>
-<% elsif @search_key %>
-<%= render "table" %>
+
 <% else %>
-<%= will_paginate %>
+<%= will_paginate @parcels %>
 <%= render "table" %>
 
 <br>
