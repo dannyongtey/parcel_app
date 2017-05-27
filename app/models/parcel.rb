@@ -4,6 +4,6 @@ class Parcel < ApplicationRecord
   validates(:phone, presence: true, length: {maximum: 15})
   default_scope -> {order(created_at: :desc)}
   def self.search(search_type, search_key)
-    Parcel.where("#{search_type} LIKE ?", "%#{search_key}%")
+    Parcel.where("#{search_type} ILIKE ?", "%#{search_key}%")
   end
 end
