@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   def create
     if params[:username] == "admin"
       admin = User.find_by(name: "admin")
+      puts admin
       log_in(admin)
       redirect_to root_url
     else
