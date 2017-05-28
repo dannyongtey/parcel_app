@@ -4,7 +4,7 @@
     <nav>
       <ul class = "nav navbar-nav navbar-right">
       <% if current_user %>
-      
+        
         <% if current_user.admin? %>
         <li><%= link_to "Add Parcels", new_parcel_path %></li>
         <% end %>

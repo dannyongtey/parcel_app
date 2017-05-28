@@ -41,11 +41,13 @@ class ParcelsController < ApplicationController
   def create
     parcels = params["parcel"]
     @error_messages = []
-    (0..parcels.length-2).each do |f|
-      parcel = parcels[f.to_s]
+    parcels.each do |f|
+      parcel = parcels[f]
       new_parcel = Parcel.new(name: parcel["name"], quantity: parcel["quantity"].to_i, phone: parcel["phone"], courier: parcel["courier"], remarks: parcel["remarks"])
       unless new_parcel.save
-        @error_messages << "Parcel #{f+1} is not saved, possibly due to empty field"
+        unless parcel["name"] == "" && quantity == "" && phone == ""
+          @error_messages << "Parcel #{f.to_i+1} is not saved, possibly due to empty field"
+        end
       end
     end
     if @error_messages.empty?

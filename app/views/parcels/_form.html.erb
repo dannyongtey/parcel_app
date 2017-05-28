@@ -21,7 +21,7 @@
     <%= label_tag "Remarks" %>
   </div>
   
-  <div class ="auto_appear">
+  <div class ="form--auto_appear">
   <!-- Auto appearing form -->
   <%= render "auto_appear" %>
   </div>
@@ -34,17 +34,17 @@
 <script>
 
   var count = 0;
-  var form = document.getElementsByClassName("auto_appear")[0];
+  var form = document.getElementsByClassName("form--auto_appear")[0];
  
   var types = ["text","number","text","text","text"];
 
   document.body.addEventListener("keypress", function(event){
     if (event.target.classList.contains("namefield") === true){
-        event.target.classList.remove("namefield");
-        count++;
+        count ++;
         var names = [`parcel[${count}][name]`, `parcel[${count}][quantity]`, `parcel[${count}][phone]`, `parcel[${count}][courier]`, `parcel[${count}][remarks]`]; 
+        event.target.classList.remove("namefield");
         container = document.createElement("DIV");
-        container.id = "form-" + count;
+        container.id = "form-" + count;        
         for (var i = 0; i < 5; i++){
           var div = document.createElement("DIV");
           if (i == 4){
@@ -52,13 +52,15 @@
           }else{
             div.classList.add("col-md-2"); 
           }
-          div.classList.add("field");
+          div.classList.add(`field-${count}`);
+          div.classList.add("field")
           var field = document.createElement("input");
           field.setAttribute("name", names[i]);
           field.setAttribute("type", types[i]);
+          field.setAttribute("onkeydown", "delete_form(event)");
           if (i == 0){
-            field.classList.add("namefield");
             field.classList.add("nameinput");
+            field.classList.add("namefield");
           }
           
           div.appendChild(field);
@@ -68,14 +70,24 @@
     }
     
   });
-  document.getElementsByClassName("nameinput")[0].addEventListener("keydown", function(event){
+
+  function delete_form(event){
+
     var key = event.keyCode || event.charCode;
     if (key == 8 || key == 46){
-       var namefield = event.target;
-       if (namefield.value == ""){
-         
-       }
+      var div = document.getElementsByClassName(event.target.parentNode.classList[1]);
+      for (var i=0; i <5; i++){
+        value = div[i].childNodes[0].value;
+        if (value != "" || div[i].childNodes[0].classList.contains("namefield")){
+          return;
+        }
+      }
+      for (var i=0; i < 5; i++){
+        x = div[i].childNodes[0];
+        x.parentNode.removeChild(x);
+      }
     }
-  });
-  
+    
+  };
+
 </script>
