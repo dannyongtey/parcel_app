@@ -36,5 +36,4 @@ ActiveRecord::Schema.define(version: 20170416095108) do
     t.datetime "oauth_expires_at"
     t.boolean  "admin"
   end
-
 end

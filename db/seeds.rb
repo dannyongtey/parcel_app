@@ -12,7 +12,7 @@
                  courier: "RandomCourier-#{f}")
 end
 
-User.create!(name: "admin",
-             password_digest: User.digest("testing123"),
-             username: "admin",
+User.create!(name: 'admin',
+             password_digest: User.digest('testing123'),
+             username: 'admin',
              admin: true)
